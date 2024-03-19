@@ -1,31 +1,62 @@
 package zooAnimales;
 
-import gestion.Zona;
+import java.util.ArrayList;
+
 
 public class Pez extends Animal{
-    private Pez[] listado;
-    public int salmones;
-    public int bacalaos;
-    private String colorEscamas;
-    private int cantidadAletas;
+    private static ArrayList<Pez> listado=new ArrayList<>();
+	public static int salmones=0;
+	public static int bacalaos=0;
+	private String colorEscamas;
+	private int cantidadAletas;
+    
+	
+	public Pez(String nombre, int edad, String habitat, String genero, String colorEscamas, int cantidadAletas) {
+		super(nombre,edad,habitat,genero);
+		this.colorEscamas=colorEscamas;
+		this.cantidadAletas=cantidadAletas;
+		Pez.listado.add(this);
+	}
+	public Pez() {
+		this(null,0,null,null,null,0);
+	}
+	public static ArrayList<Pez> getListado() {
+		return listado;
+	}
+	public static void setListado(ArrayList<Pez> listado) {
+		Pez.listado=listado;
+	}
+	
+    
+    public String getColorEscamas(){
+        return this.colorEscamas;
+    }
+    public void setColorEscamas(String tf){
+        this.colorEscamas=tf;
+    }
+    public int getCantidadAletas(){
+        return this.cantidadAletas;
+    }
+    public void setCantidadAletas(int cantidadAletas){
+        this.cantidadAletas=cantidadAletas;
+    }
     public int cantidadPeces(){
         return salmones+bacalaos;
+    }
+    public static Pez crearSalmon(String nombre, int edad, String genero) {
+        Pez Pez=new Pez(nombre,edad,"oceano",genero,"rojo",6);
+		salmones++;
+		return Pez;
+
+    }
+    public static Pez crearBacalao(String nombre, int edad, String genero) {
+        Pez Pez=new Pez(nombre,edad,"oceano",genero,"gris",6);
+		bacalaos++;
+		return Pez;
+
     }
     public String movimiento(){
         return "nadar";
     }
-    public void crearSalmon(String nombre,int edad,String genero){
-        this.colorEscamas="rojo";
-        this.cantidadAletas=6;
-        String valor=getHabitat();
-        setHabitat("oceano");
-        salmones++;
-    }
-    public void crearBacalao(String nombre,int edad,String genero){
-        this.colorEscamas="gris";
-        this.cantidadAletas=6;
-        String valor=getHabitat();
-        setHabitat("oceano");
-        bacalaos++;
-    }
 }
+
